@@ -11,11 +11,14 @@ def connect():
 	return psycopg2.connect("dbname=tournament")
 
 def execute(has_commit, query, *params):
+	"""Connects to the PostgreSQL database, executes the query
+		and returns the rows, if any.
+	"""
 	db = connect()
 	c = db.cursor()
 
 	if params:
-		c.execute(query, (params,))
+		c.execute(query, params)
 	else:
 		c.execute(query)
 
@@ -53,7 +56,8 @@ def registerPlayer(name):
 	Args:
 	  name: the player's full name (need not be unique).
 	"""
-	execute(True, "INSERT INTO player (name) VALUES (%s)", name)
+	parameter = (name,)
+	execute(True, "INSERT INTO player (name) VALUES (%s)", parameter)
 
 def playerStandings():
 	"""Returns a list of the players and their win records, sorted by wins.

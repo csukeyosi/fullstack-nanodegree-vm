@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS tournament;
+
 CREATE DATABASE tournament;
 
 \c tournament
@@ -9,10 +11,9 @@ CREATE TABLE player  (
 
 CREATE TABLE match  (
     id serial PRIMARY KEY,
-    loser integer,
-    winner integer,
- 	FOREIGN KEY (loser) REFERENCES player (id),
- 	FOREIGN KEY (winner) REFERENCES player (id)
+    loser INT REFERENCES player(id) ON DELETE CASCADE,
+    winner INT REFERENCES player(id) ON DELETE CASCADE,
+    CHECK (loser <> winner)
 );
 
 CREATE VIEW rank as
