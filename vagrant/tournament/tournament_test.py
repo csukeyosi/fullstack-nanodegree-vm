@@ -17,6 +17,7 @@ def testCount():
     deleteMatches()
     deletePlayers()
     c = countPlayers()
+    print c
     if c == '0':
         raise TypeError(
             "countPlayers should return numeric zero, not string '0'.")
@@ -128,6 +129,7 @@ def testPairings():
     reportMatch(id5, id6)
     reportMatch(id7, id8)
     pairings = swissPairings()
+    print pairings
     if len(pairings) != 4:
         raise ValueError(
             "For eight players, swissPairings should return 4 pairs. Got {pairs}".format(pairs=len(pairings)))
